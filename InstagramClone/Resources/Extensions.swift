@@ -35,3 +35,13 @@ extension UIView {
         frame.origin.x + frame.size.width
     }
 }
+
+/// String extension method to create a Firebase safe key from the email address
+/// - Returns
+/// - The original string with occurrences of "." and "@" replaced with "-"
+extension String {
+    func safeDatabaseKey() -> String {
+        
+        return self.replacingOccurrences(of: ".", with: "-").replacingOccurrences(of: "@", with: "-")
+    }
+}

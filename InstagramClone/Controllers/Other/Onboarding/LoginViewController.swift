@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 import SafariServices
 
 class LoginViewController: UIViewController {
@@ -14,8 +15,7 @@ class LoginViewController: UIViewController {
         static let cornerRadius: CGFloat = 8.0
     }
     
-//    Declaring all of the elements on our login screen programatically
-    
+    // Defining all of our subviews for this page
     
     private let usernameEmailField: UITextField = {
         let field = UITextField()
@@ -99,11 +99,14 @@ class LoginViewController: UIViewController {
     
    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
+        // Setting the two input fields to listen for changes on themselves
         usernameEmailField.delegate = self
         passwordField.delegate = self
         
+        // Adding the functions that will run when the buttons are tapped
         loginButton.addTarget(self,
                               action: #selector(didTapLoginButton),
                               for: .touchUpInside)
@@ -120,14 +123,24 @@ class LoginViewController: UIViewController {
                               action: #selector(didTapPrivacyButton),
                               for: .touchUpInside)
         
+        // Adding the subviews to the main View
         addSubViews()
+        
         view.backgroundColor = .systemBackground
     }
+    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        // Assign frames
+        configureFrames()
+        
+        configureHeaderView()
+}
+    
+    private func configureFrames() {
+        
+        // Assigning frames to each of the subviews to define their size and location
         
         headerView.frame = CGRect(
             x: 0,
@@ -170,10 +183,7 @@ class LoginViewController: UIViewController {
             y: view.height - view.safeAreaInsets.bottom - 50,
             width: view.width - 225,
             height: 50)
-        
-        
-        configureHeaderView()
-}
+    }
     
     private func configureHeaderView() {
         
@@ -201,6 +211,7 @@ class LoginViewController: UIViewController {
                                  height: headerView.height - view.safeAreaInsets.top)
     }
     
+    
     private func addSubViews() {
         view.addSubview(usernameEmailField)
         view.addSubview(passwordField)
@@ -218,14 +229,46 @@ class LoginViewController: UIViewController {
         passwordField.resignFirstResponder()
         usernameEmailField.resignFirstResponder()
         
+        // Checking all the field conditions at once, and returning if any of them are not met
         guard let usernameEmail = usernameEmailField.text, !usernameEmail.isEmpty,
               let password = passwordField.text, !password.isEmpty, password.count >= 8 else {
             return
         }
         
+        var email: String?
+        var username: String?
+        
+        if usernameEmail.contains("@"), usernameEmail.contains(".") {
+            // email
+            email = usernameEmail
+        } else {
+            username = usernameEmail
+        }
+        
         // Login functionality
         
-        
+        AuthManager.shared.loginUser(username: username, email: email, password: password) {success in
+            
+            // Async login
+            DispatchQueue.main.async {
+                
+                if success {
+                    
+                    // Dismissing the presented View
+                    self.dismiss(animated: true, completion: nil)
+                    
+                } else {
+                    
+                    let alert = UIAlertController(title: "Log in error",
+                                                  message: "We were unable to log you in",
+                                                  preferredStyle: .alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+                    
+                    self.present(alert, animated: true)
+                }
+            }
+        }
     }
     
     // Showing the terms of service in a WebView
@@ -252,10 +295,12 @@ class LoginViewController: UIViewController {
     @objc private func didTapCreateAccountButton() {
         
         let vc = RegistrationViewController()
-        present(vc, animated: true)
+        
+        vc.title = "Create Account"
+        
+        present(UINavigationController(rootViewController: vc), animated: true)
         
     }
-    
 }
 
 // Handling returns in the text fields
