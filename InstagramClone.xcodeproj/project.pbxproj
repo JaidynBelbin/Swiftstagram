@@ -41,6 +41,10 @@
 		DE29815225E26CE200569BE3 /* IGFeedPostHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE29815125E26CE200569BE3 /* IGFeedPostHeaderTableViewCell.swift */; };
 		DE29815725E26CFC00569BE3 /* IGFeedPostActionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE29815625E26CFC00569BE3 /* IGFeedPostActionsTableViewCell.swift */; };
 		DE29815C25E26D1300569BE3 /* IGFeedPostGeneralTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE29815B25E26D1300569BE3 /* IGFeedPostGeneralTableViewCell.swift */; };
+		DE29816125E28E5900569BE3 /* FormTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE29816025E28E5900569BE3 /* FormTableViewCell.swift */; };
+		DE29816625E29D3500569BE3 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE29816525E29D3500569BE3 /* PhotoCollectionViewCell.swift */; };
+		DE29816B25E29ECF00569BE3 /* ProfileInfoHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE29816A25E29ECF00569BE3 /* ProfileInfoHeaderCollectionReusableView.swift */; };
+		DE29817025E29F1400569BE3 /* ProfileTabsCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE29816F25E29F1400569BE3 /* ProfileTabsCollectionReusableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +108,10 @@
 		DE29815125E26CE200569BE3 /* IGFeedPostHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGFeedPostHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		DE29815625E26CFC00569BE3 /* IGFeedPostActionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGFeedPostActionsTableViewCell.swift; sourceTree = "<group>"; };
 		DE29815B25E26D1300569BE3 /* IGFeedPostGeneralTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGFeedPostGeneralTableViewCell.swift; sourceTree = "<group>"; };
+		DE29816025E28E5900569BE3 /* FormTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTableViewCell.swift; sourceTree = "<group>"; };
+		DE29816525E29D3500569BE3 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		DE29816A25E29ECF00569BE3 /* ProfileInfoHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		DE29816F25E29F1400569BE3 /* ProfileTabsCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabsCollectionReusableView.swift; sourceTree = "<group>"; };
 		E92431B8FC9F9DF8C9819C7F /* Pods_InstagramClone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstagramClone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB078283BE35620380294306 /* Pods_InstagramCloneTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstagramCloneTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9239738A2CF03A3F5358307 /* Pods-InstagramCloneTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramCloneTests.debug.xcconfig"; path = "Target Support Files/Pods-InstagramCloneTests/Pods-InstagramCloneTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -215,6 +223,7 @@
 		DE29809225DFD1A000569BE3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DE29817425E2A01000569BE3 /* CollectionView Headers */,
 				DE29814425E26B0F00569BE3 /* Cells */,
 				DE29809725DFD22D00569BE3 /* Storyboards */,
 				DE29804C25DFCB9700569BE3 /* Assets.xcassets */,
@@ -310,6 +319,8 @@
 			isa = PBXGroup;
 			children = (
 				DE29814D25E26CC300569BE3 /* Home Feed */,
+				DE29816025E28E5900569BE3 /* FormTableViewCell.swift */,
+				DE29816525E29D3500569BE3 /* PhotoCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -323,6 +334,15 @@
 				DE29815B25E26D1300569BE3 /* IGFeedPostGeneralTableViewCell.swift */,
 			);
 			path = "Home Feed";
+			sourceTree = "<group>";
+		};
+		DE29817425E2A01000569BE3 /* CollectionView Headers */ = {
+			isa = PBXGroup;
+			children = (
+				DE29816A25E29ECF00569BE3 /* ProfileInfoHeaderCollectionReusableView.swift */,
+				DE29816F25E29F1400569BE3 /* ProfileTabsCollectionReusableView.swift */,
+			);
+			path = "CollectionView Headers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -573,15 +593,19 @@
 				DE29815225E26CE200569BE3 /* IGFeedPostHeaderTableViewCell.swift in Sources */,
 				DE2980E625DFD9AB00569BE3 /* PostEditorViewController.swift in Sources */,
 				DE29811D25DFE9A500569BE3 /* StorageManager.swift in Sources */,
+				DE29816125E28E5900569BE3 /* FormTableViewCell.swift in Sources */,
 				DE2980C325DFD3CA00569BE3 /* RegistrationViewController.swift in Sources */,
+				DE29817025E29F1400569BE3 /* ProfileTabsCollectionReusableView.swift in Sources */,
 				DE29811325DFE8D400569BE3 /* DatabaseManager.swift in Sources */,
 				DE2980C825DFD42100569BE3 /* PostViewController.swift in Sources */,
 				DE29814625E26B2C00569BE3 /* IGFeedPostTableViewCell.swift in Sources */,
+				DE29816625E29D3500569BE3 /* PhotoCollectionViewCell.swift in Sources */,
 				DE2980AE25DFD34A00569BE3 /* NotificationsViewController.swift in Sources */,
 				DE2980BE25DFD3BE00569BE3 /* LoginViewController.swift in Sources */,
 				DE29813A25DFF08C00569BE3 /* Extensions.swift in Sources */,
 				DE29815C25E26D1300569BE3 /* IGFeedPostGeneralTableViewCell.swift in Sources */,
 				DE2980DC25DFD97300569BE3 /* SearchViewController.swift in Sources */,
+				DE29816B25E29ECF00569BE3 /* ProfileInfoHeaderCollectionReusableView.swift in Sources */,
 				DE2980B325DFD35800569BE3 /* ProfileViewController.swift in Sources */,
 				DE29811825DFE96300569BE3 /* AuthManager.swift in Sources */,
 				DE29804425DFCB9300569BE3 /* AppDelegate.swift in Sources */,

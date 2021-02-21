@@ -114,6 +114,7 @@ final class SettingsViewController: UIViewController {
         
         // VC needs a nav controller
         let navVC = UINavigationController(rootViewController: vc)
+        navVC.modalPresentationStyle = .fullScreen
         present(navVC, animated: true)
         
     }
