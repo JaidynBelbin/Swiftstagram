@@ -47,6 +47,10 @@ class ExploreViewController: UIViewController, UICollectionViewDelegate, UIColle
         }
         
         view.addSubview(collectionView)
-        
+       
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        searchBar.resignFirstResponder()
     }
 }

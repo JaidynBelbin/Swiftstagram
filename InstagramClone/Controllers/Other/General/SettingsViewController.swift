@@ -5,12 +5,15 @@
 //  Created by Jaidyn Belbin on 19/2/21.
 //
 
+import SafariServices
 import UIKit
 
+// The model/data source for each cell, simply a title and a method
+// that handles interactions with the cell
 struct SettingCellModel {
     
     let title: String
-    let handler: (() -> Void) // Handles interactions with the cell
+    let handler: (() -> Void)
 }
 
 
@@ -24,7 +27,7 @@ final class SettingsViewController: UIViewController {
         return tableView
     }()
     
-    // 2D array because we will have multiple sections
+    // An array of sections, with each containing an array of cells.
     private var data = [[SettingCellModel]]()
     
     override func viewDidLoad() {
@@ -45,16 +48,84 @@ final class SettingsViewController: UIViewController {
     }
     
     private func configureModels() {
+    
+        // Appending the sections to the data source, with each section containing one or more cells
+        data.append([
+            SettingCellModel(title: "Edit Profile") { [weak self] in
+                self?.didTapEditProfile()
+            },
+            SettingCellModel(title: "Invite Friends") { [weak self] in
+                self?.didTapInviteFriends()
+            },
+            SettingCellModel(title: "Save Original Posts") { [weak self] in
+                self?.didTapSaveOriginalPosts()
+            },
+        ])
         
-        let section = [
-            SettingCellModel(title: "Log out") { [weak self] in
+        data.append([
+            SettingCellModel(title: "Terms of Service") { [weak self] in
+                self?.openURL(type: .terms)
+            },
+            SettingCellModel(title: "Privacy Policy") { [weak self] in
+                self?.openURL(type: .privacy)
+            },
+            SettingCellModel(title: "Help / Feedback") { [weak self] in
+                self?.openURL(type: .help)
+            }
+        ])
+        
+        data.append([SettingCellModel(title: "Log out") { [weak self] in
                 
                 self?.didTapLogOut()
             }
-        ]
+        ])
         
-        data.append(section)
+        
     }
+    
+    // Types of URLs we will open
+    enum SettingsURLType {
+        case terms, privacy, help
+    }
+    
+    // Opens the URL of a given type in a Safari web view
+    private func openURL(type: SettingsURLType) {
+        
+        let urlString: String
+        
+        switch type {
+            case .terms: urlString = "https://www.facebook.com/help/instagram/termsofuse"
+            case .privacy: urlString = "https://www.facebook.com/help/instagram/519522125107875/?helpref=hc_fnav&bc[0]=Instagram%20Help&bc[1]=Privacy%20and%20Safety%20Center"
+            case .help: urlString = "https://help.instagram.com"
+        }
+        
+        guard let url = URL(string: urlString) else {
+            return
+        }
+        
+        let vc = SFSafariViewController(url: url)
+        present(vc, animated: true)
+    }
+    
+    private func didTapEditProfile() {
+        
+        let vc = EditProfileViewController()
+        vc.title = "Edit Profile"
+        
+        // VC needs a nav controller
+        let navVC = UINavigationController(rootViewController: vc)
+        present(navVC, animated: true)
+        
+    }
+    
+    private func didTapInviteFriends() {
+        
+    }
+    
+    private func didTapSaveOriginalPosts() {
+        
+    }
+    
     
     private func didTapLogOut() {
         
@@ -95,6 +166,7 @@ final class SettingsViewController: UIViewController {
 
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
+    // Specifying the number of sections and number of rows in each section
     func numberOfSections(in tableView: UITableView) -> Int {
         return data.count
     }
@@ -103,9 +175,10 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         return data[section].count
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
+        cell.accessoryType = .disclosureIndicator
         cell.textLabel?.text = data[indexPath.section][indexPath.row].title
         return cell
     }

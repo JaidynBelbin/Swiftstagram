@@ -10,7 +10,15 @@ import UIKit
 var handle: AuthStateDidChangeListenerHandle?
 
 class HomeViewController: UIViewController {
-
+    
+   
+    private let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(IGFeedPostTableViewCell.self,
+                           forCellReuseIdentifier: IGFeedPostTableViewCell.identifier)
+        return tableView
+    }()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -37,6 +45,18 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.addSubview(tableView)
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        tableView.frame = view.bounds
     }
    
     override func viewWillDisappear(_ animated: Bool) {
@@ -45,24 +65,24 @@ class HomeViewController: UIViewController {
         Auth.auth().removeStateDidChangeListener(handle!)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-       
-        //handleNotAuthenticated()
-        
-       
+}
+
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 0
     }
     
-    private func handleNotAuthenticated() {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if Auth.auth().currentUser == nil {
-            
-            // Show login view
-            let loginVC = LoginViewController()
-            loginVC.modalPresentationStyle = .fullScreen
-            present(loginVC, animated: false)
-        }
+        // Creating a custom cell for this table view
+        let cell = tableView.dequeueReusableCell(withIdentifier: IGFeedPostTableViewCell.identifier, for: indexPath) as! IGFeedPostTableViewCell
+        
+        return cell
     }
 }
 
