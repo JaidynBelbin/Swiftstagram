@@ -5,6 +5,7 @@ target 'InstagramClone' do
   use_frameworks!
 
 pod 'Appirater'
+pod 'SDWebImage'
 
 
 

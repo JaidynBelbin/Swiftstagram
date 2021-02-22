@@ -49,7 +49,8 @@ final class SettingsViewController: UIViewController {
     
     private func configureModels() {
     
-        // Appending the sections to the data source, with each section containing one or more cells
+        // Appending the sections to the data source, with each section containing one or more cells,
+        // and specifying the handler() as a closure which calls a certain method
         data.append([
             SettingCellModel(title: "Edit Profile") { [weak self] in
                 self?.didTapEditProfile()
@@ -178,8 +179,9 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.accessoryType = .disclosureIndicator
+        cell.accessoryType = .disclosureIndicator // the little arrow on the side to segue to new page
         cell.textLabel?.text = data[indexPath.section][indexPath.row].title
         return cell
     }
@@ -187,6 +189,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        // Doing whatever each handler was set up to do in configureModels()
         data[indexPath.section][indexPath.row].handler()
     }
 }

@@ -67,7 +67,7 @@ class FormTableViewCell: UITableViewCell {
         
         self.model = model
         formLabel.text = model.label
-        field.placeholder = model.placeholder
+        field.placeholder = model.value
         field.text = model.value
     }
     

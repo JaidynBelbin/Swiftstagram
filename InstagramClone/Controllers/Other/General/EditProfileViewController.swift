@@ -183,6 +183,6 @@ extension EditProfileViewController: UITableViewDataSource, FormTableViewCellDel
     // Called whenever the Return key is hit after editing any of the fields
     func formTableViewCell(_ cell: FormTableViewCell, didUpdateField updatedModel: EditProfileFormModel) {
         
-        print("\(updatedModel.label) was updated" ?? "nil")
+        print("\(updatedModel.label) was updated")
     }
 }
