@@ -70,7 +70,7 @@ public class AuthManager {
         
         if let email = email {
             
-            // Signing in with Firebase using email (note the closure expression { blah blah blah } )
+            // Signing in with Firebase using email
             Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
                 
                 guard authResult != nil, error == nil else {
@@ -83,7 +83,7 @@ public class AuthManager {
             }
                 
             
-            // email login
+            // username login to come
             
         } else if let username = username {
             
